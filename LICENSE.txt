@@ -1,5 +1,8 @@
 MIT License
 
+MIT License
+
+Copyright (c) 2025 yeticarus
 Copyright (c) 2022 snesrev
 Copyright (c) 2021 elzo_d
 
