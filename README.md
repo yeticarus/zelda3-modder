@@ -1,6 +1,6 @@
 # Zelda3
 
-Based on the [reimplementation of Zelda 3 for snesrev](https://github.com/snesrev/zelda3).
+Based on the [reimplementation of Zelda 3](https://github.com/snesrev/zelda3).
 The code contains some modifications for original to help modding (some options can be activated in the zelda3.ini file):
 	- debugWindow: a debug window showing the 4 layers 
 	- an example of implementation for Zelda following you in the overworld
