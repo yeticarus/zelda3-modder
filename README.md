@@ -9,7 +9,7 @@ The code contains some modifications for original to help modding (some options 
 
 - Pokemode: catching any monster with the bug net (or directly with an empty jar). Some like guards or raven will fight for you when released.
 
-- ppu can draw over the black bars 
+- ppu can draw over the black bars (in an attempt to get rid of them) 
  
 Most of the mods contain glitches, we need you in our community to fix them :)
 
