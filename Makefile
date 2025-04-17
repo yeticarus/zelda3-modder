@@ -4,7 +4,7 @@ SRCS:=$(wildcard *.c snes/*.c) third_party/gl_core/gl_core_3_1.c third_party/opu
 OBJS:=$(SRCS:%.c=%.o)
 PYTHON:=/usr/bin/env python3
 CFLAGS:=$(if $(CFLAGS),$(CFLAGS),-O2 -Werror)
-CFLAGS:=${CFLAGS} $(shell sdl2-config --cflags --sprites-from-png) -DSYSTEM_VOLUME_MIXER_AVAILABLE=0
+CFLAGS:=${CFLAGS} $(shell sdl2-config --cflags) -DSYSTEM_VOLUME_MIXER_AVAILABLE=0
 
 ifeq (${OS},Windows_NT)
     WINDRES:=windres
