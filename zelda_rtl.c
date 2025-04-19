@@ -184,7 +184,7 @@ uint32_t AlphaBlendPixels(uint32_t p1, uint32_t p2)
     static const int AMASK = 0xFF000000;
     static const int RBMASK = 0x00FF00FF;
     static const int GMASK = 0x0000FF00;
-    static const int AGMASK = AMASK | GMASK;
+    static const int AGMASK = 0xFF00FF00;
     static const int ONEALPHA = 0x01000000;
     unsigned int a = (p2 & AMASK) >> 24; //the alpha int8 value is extracted from p2
     unsigned int na = 255 - a;
