@@ -13,8 +13,8 @@
 #include "zelda_rtl.h" //ModOverLayer (calls g_zenv)
 
 
-const uint32_t modOL_offset_x = 512; //ModOverLayer
-const uint32_t modOL_offset_y = 250; //ModOverLayer
+const uint32_t modOL_offset_x = 512; //=MODOVERLAYERMAX_x/2; //ModOverLayer
+const uint32_t modOL_offset_y = 250; //=MODOVERLAYERMAX_y/2; //ModOverLayer
 
 #define byte_7FFE01 (*(uint8*)(g_ram+0x1FE01))
 static const int8 kSpriteKeese_Tab2[16] = {0, 8, 11, 14, 16, 14, 11, 8, 0, -8, -11, -14, -16, -14, -11, -8};
@@ -4710,14 +4710,14 @@ void Guard_Main(int k) {  // 85c227
   int yy_0 = link_y_coord - origin_y +(sprite_subtype2[k]/5)%5-3;// =0 Relative to link_y_coord;
   for(int xx=xx_0+6; xx< (xx_0 + 10) ; xx++){
     for(int yy=yy_0 - 13; yy<(yy_0 -6); yy++){
-        if(yy>0 && xx>0){
+        if(yy>=0 && xx>=0 && xx< MODOVERLAYERMAX_x && yy<MODOVERLAYERMAX_y){
             redModOverLayer[xx][yy] = 254;
             greenModOverLayer[xx][yy] = 254;
             alphaModOverLayer[xx][yy] = 100;
         }
     }//exclamation dot
     for(int yy=yy_0 - 3; yy<(yy_0 +0); yy++){
-        if(yy>0 && xx>0){
+        if(yy>=0 && xx>=0 && xx< MODOVERLAYERMAX_x && yy<MODOVERLAYERMAX_y){
             redModOverLayer[xx][yy] = 254;
             greenModOverLayer[xx][yy] = 254;
             alphaModOverLayer[xx][yy] = 100;
@@ -4729,7 +4729,7 @@ void Guard_Main(int k) {  // 85c227
   yy_0 = Sprite_GetY(k) - origin_y;//-2800-17;
   for(int xx=xx_0; xx< (xx_0 + sprite_health[k]) ; xx++){
     for(int yy=(yy_0 - 14); yy<(yy_0 -10); yy++){
-        if(yy>0 && xx>0){
+        if(yy>=0 && xx>=0 && xx<MODOVERLAYERMAX_x && yy<MODOVERLAYERMAX_y){
             redModOverLayer[xx][yy] = 254;
             alphaModOverLayer[xx][yy] = 254;
         }

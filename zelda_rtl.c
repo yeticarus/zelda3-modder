@@ -16,9 +16,6 @@
 ZeldaEnv g_zenv;
 uint8 g_ram[131072];
 
-uint modOverLayerMax_x = 2048;// (256+112)*2;
-uint modOverLayerMax_y = 2048;//(224+26)*2;
-
 uint32 g_wanted_zelda_features;
 
 static void Startup_InitializeMemory();
@@ -152,8 +149,8 @@ static void ConfigurePpuSideSpace() {
   if (mod == 9) {
     if (main_module_index == 14 && submodule_index == 7 && overworld_map_state >= 4) {
       // World map
-      extra_left = kPpuExtraLeftRight +300; //GuessBehindBlackBorders: +300 here help win ~20pixels to the right...
-      extra_right = kPpuExtraLeftRight +300; //GuessBehindBlackBorders: +300 here help win ~20pixels to the right...
+      extra_left = kPpuExtraLeftRight +300; //GuessBehindBlackBorders: +300 here may help win ~20pixels to the right...
+      extra_right = kPpuExtraLeftRight +300; //GuessBehindBlackBorders: +300 here may help win ~20pixels to the right...
       extra_bottom = 16;
     } else {
       // outdoors
@@ -346,21 +343,21 @@ void ZeldaDrawPpuFrame(uint8 *pixel_buffer, size_t pitch, uint32 render_flags) {
 
         // We need to transform absolute coords (from modoverlayer) into realtive coord (screen display)
         // We are lucky that x and rows are always %512, so (link_x_onscreen, link_y_onscreen) do the trick
-        int xx = x - link_x_onscreen + modOL_offset_x;
-        int yy = row - link_y_onscreen + modOL_offset_y ;
-        if( xx >0 && yy>0){
+        uint xx = x - link_x_onscreen + modOL_offset_x;
+        uint yy = row - link_y_onscreen + modOL_offset_y ;
+        if( xx >=0 && yy>=0 && xx<MODOVERLAYERMAX_x && yy<MODOVERLAYERMAX_y){
             r = redModOverLayer[xx][yy];
             g = greenModOverLayer[xx][yy];
             b = blueModOverLayer[xx][yy];
             alpha = alphaModOverLayer[xx][yy];
-            if(xx-512>0){
+            if(xx-512>0 && xx-512<MODOVERLAYERMAX_x ){
                 //To deal with left side when we are far right (on large areas >512px):
                 r +=  redModOverLayer[xx-512][yy];
                 g +=  greenModOverLayer[xx-512][yy];
                 b +=  blueModOverLayer[xx-512][yy];
                 alpha = alpha<alphaModOverLayer[xx-512][yy]? alphaModOverLayer[xx-512][yy] : alpha;
             }
-            if(yy-512>0){
+            if(yy-512>0  && yy-512<MODOVERLAYERMAX_y){
                 r +=  redModOverLayer[xx][yy-512];
                 g +=  greenModOverLayer[xx][yy-512];
                 b +=  blueModOverLayer[xx][yy-512];
@@ -421,8 +418,8 @@ void ZeldaDrawPpuFrame(uint8 *pixel_buffer, size_t pitch, uint32 render_flags) {
   }
 
   //cleaning modOverLayer for the next frame
-  for (uint x = 0; x < modOverLayerMax_x; x++){
-    for (uint row = 0; row < modOverLayerMax_y; row++){
+  for (uint x = 0; x < MODOVERLAYERMAX_x; x++){
+    for (uint row = 0; row < MODOVERLAYERMAX_y; row++){
       redModOverLayer[x][row]=0;
       greenModOverLayer[x][row]=0;
       blueModOverLayer[x][row]=0;

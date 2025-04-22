@@ -14,19 +14,21 @@
 struct Snes;
 struct Dsp;
 
-extern const uint32_t modOL_offset_x; //ModOverLayer
-extern const uint32_t modOL_offset_y; //ModOverLayer
-
-//ModOverLayer will be centered around link, so we need it x to be able to cover: 2*screen max width, and y: 2* screen max height
-//extern uint modOverLayerMax_x;// (256+112)*2;
-//extern uint modOverLayerMax_y;//(224+26)*2;
-uint32_t redModOverLayer[2048][2048];//ModOverLayer
-uint32_t greenModOverLayer[2048][2048];//ModOverLayer
-uint32_t blueModOverLayer[2048][2048]; //ModOverLayer
-uint32_t alphaModOverLayer[2048][2048]; //ModOverLayer
-
 //ModOverLayer:
+//ModOverLayer will be centered around link, so we need it x to be able to cover: 2*screen max width, and y: 2* screen max height
+// (512+112)*2 = 1248 //ModOverLayer
+#define MODOVERLAYERMAX_x 1248
+// (screen_height + extra)*2 =(224+26)*2 = 500 //ModOverLayer
+#define MODOVERLAYERMAX_y 500
+uint32_t redModOverLayer[MODOVERLAYERMAX_x][MODOVERLAYERMAX_y];
+uint32_t greenModOverLayer[MODOVERLAYERMAX_x][MODOVERLAYERMAX_y];
+uint32_t blueModOverLayer[MODOVERLAYERMAX_x][MODOVERLAYERMAX_y];
+uint32_t alphaModOverLayer[MODOVERLAYERMAX_x][MODOVERLAYERMAX_y];
+extern const uint32_t modOL_offset_x;
+extern const uint32_t modOL_offset_y;
+
 uint32_t AlphaBlendPixels(uint32_t p1, uint32_t p2);
+//:ModOverLayer
 
 typedef struct ZeldaEnv {
   uint8 *ram;
