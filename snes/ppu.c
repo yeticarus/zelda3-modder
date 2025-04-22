@@ -953,7 +953,7 @@ static NOINLINE void PpuDrawWholeLine(Ppu *ppu, uint y) {
             memset(dst_org, 0, sizeof(uint32) * (ppu->extraLeftRight - ppu->extraLeftCur));
         }else{
         //GuessBehindBlackBorders: Roll the screen
-            for(unsigned long i=0; i<   (sizeof(uint32)) *0 + (  (2*ppu->extraLeftRight + 256)); i++){
+            for(unsigned long i=0; i<  (256 + 2*ppu->extraLeftRight); i++){
                 *(dst_org+i) = *(dst_org+i + ppu->extraLeftRight - ppu->extraLeftCur);
             }
         //:GuessBehindBlackBorders
@@ -963,11 +963,11 @@ static NOINLINE void PpuDrawWholeLine(Ppu *ppu, uint y) {
     if (ppu->extraLeftRight - ppu->extraRightCur != 0){
         if(player_is_indoors || !g_config.guess_behind_black_borders){
             // Set black bars on the right hand side:
-            memset(dst_org + (256 + ppu->extraLeftRight * 2 - (ppu->extraLeftRight - ppu->extraRightCur)), 0,
+            memset(dst_org + (256 + 2*ppu->extraLeftRight - (ppu->extraLeftRight - ppu->extraRightCur)), 0,
                 sizeof(uint32) * (ppu->extraLeftRight - ppu->extraRightCur));
         }else{
             //GuessBehindBlackBorders: Roll the screen
-            for(unsigned long i=sizeof(uint32) * (ppu->extraLeftRight + 256 +100 ); i>0; i--){
+            for(unsigned long i=sizeof(uint32) * (256 + ppu->extraLeftRight); i>0; i--){
                 *(dst_org+i + ppu->extraLeftRight - ppu->extraRightCur) = *(dst_org+i);
             }
         //:GuessBehindBlackBorders
